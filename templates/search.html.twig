@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}You searched for: {{ userImageSearch }} {% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+
+        <div class="container-fluid">
+            <h1>Shutterstock Image Search for Commercial Use</h1>
+            <p>This is an free to use service that allows you to search for images to be used for commercial use, filtering out any editioral images. <p>
+           <p>The main idea is for you to look for images without having to worry about anthing editorial (i.e. further restructions + copyright problems)</p>
+           <p>Simply copy the id of the image to use and download via your Shutterstock account online. NOTE an paid subscription is required. </p>
+        <h2>You Searched for: <span> {{ userImageSearch }} </span>  </h2>
+
+        
+         
+     <div class="row">
+<div class="input-group">
+<form class="pull-right hidden" role="search" id="nav-search-form" method="get" action="">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" name="usersearch" value="{{ userImageSearch }}" >
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">Search Images</button>
+          </span>
+        </div>
+      </form>
+
+</div>
+
+    {% if getImages is empty or app.request.get('usersearch') is null %}
+        <p>No results found for {{ userImageSearch }}</p>
+        {% else %}
+            {% for key, value in getImages %}
+                <div class="col">
+                    <img src="{{ value.preview.0.url }}" />
+                    <p class="id"> Photo ID: {{ key }}</p>
+                </div>
+    {% endfor %}
+    {% endif %}
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>

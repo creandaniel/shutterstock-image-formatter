@@ -1,6 +1,6 @@
 # ShutterStock Image Formatter
 
-Search for images that automatically filter out editorial and are exclusive for editorial use.
+Search for images that automatically filter out editorial and are exclusive for editorial use. Built using Symfony
 
 ## Installation
 
